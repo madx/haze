@@ -7,6 +7,7 @@ body {
 
 a:link, a:visited {
   text-decoration: none;
+  font-weight: bold;
   color: #204a87;
   padding: 0 1px;
 }
