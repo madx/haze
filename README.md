@@ -39,7 +39,7 @@ this:
 
     run Haze::App
 
-Create folder to put your entries in: `mkdir entries`.
+Create the folder where you will put your entries: `mkdir entries`.
 Then run the app with `$ rackup -E production config.ru`.
 
 ## Source ####################################################################
@@ -54,15 +54,17 @@ Haze's Git repo is available on GitHub, which can be browsed at
 Haze entry format enforces a few conventions:
 
 An entry is split in two parts. The first is a header and the second the entry
-body. The separator is a succession of at least `-` put on a line of their own.
+body. The separator is a succession of at least three `-` put on a line of their
+own.
 
 The header will be the title of your entry. Every word starting with a `#` will
 create a new tag. Tags are automatically lowercase'd. You can add tags that
 won't show up in the title by enclosing them in braces (`{}`).
 
 To determine the order of entries and their URLs, you have to give a correct
-name to the file they are stored into. The format is
-`<date>[+<counter>]_<slug>.(hz/draft)`.
+name to the file they are stored into.
+
+The format is: `<date>[+<counter>]_<slug>.(hz/draft)`.
 
 `<date>` must be parseable by `Time.parse`, the handiest format to use is
 probably `<year>-<month>-<day>`. The `+<counter>` part allows you to write
@@ -70,8 +72,9 @@ multiple entries with on single `<date>`. Behind the scenes, it simply adds
 `<counter>` seconds to the parsed date.
 
 `<slug>` will be the name of the URL for your entry. `hz` or `draft` tells if
-the file is a regular entry or a draft. Drafts are viewable using the url
-`/draft/<slug>`.
+the file is a regular entry or a draft.
+
+Drafts are viewable using the url `/draft/<slug>`.
 
 Example:
 
