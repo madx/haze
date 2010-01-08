@@ -1,50 +1,68 @@
 require 'time'
 require 'pathname'
 require 'sinatra/base'
-require 'haml'
 require 'mime/types'
+require 'haml'
+require 'builder'
 
 module Haze
   extend self
 
-  attr_reader :posts, :drafts, :tags
+  attr_reader :entries, :drafts, :tags, :options
 
-  @posts, @drafts, @tags = [], {}
+  @entries, @drafts, @tags, @options = [], [], {}, {}
+
+  def set(opt, value=true)
+    options[opt] = value
+  end
+
+  def opt(opt)
+    options[opt]
+  end
+
+  set :title,  "My blog"
+  set :author, "My name"
+  set :uri,    "http://example.com/"
+  set :email,  "me@example.com"
 
   def reload!
-    @posts  = Dir['entries/*.hz'].map {|p|
-      Post.open(p)
-    }.sort_by {|p| p.date }
+    @entries = Dir['entries/*.hz'].map {|p|
+      Entry.open(p)
+    }.sort_by {|e| e.date }
 
     @drafts = Dir['entries/*.draft'].map {|p|
-      Post.open(p)
-    }.sort_by {|p| p.date }
+      Entry.open(p)
+    }.sort_by {|e| e.date }
 
-    @posts.map {|p| p.tags }.flatten.tap do |ts|
+    @entries.map {|e| e.tags }.flatten.tap do |ts|
       @tags = ts.flatten.uniq.inject({}) {|h,t| h.merge({t => ts.count(t)}) }
     end
   end
 
-  class Post
+  class Entry
     attr_accessor :date, :slug, :title, :body, :tags
 
     def after
-      Haze.posts[index+1]
+      Haze.entries[index+1]
     end
 
     def before
-      index - 1 < 0 ? nil : Haze.posts[index-1]
+      index - 1 < 0 ? nil : Haze.entries[index-1]
     end
 
     def index
-      Haze.posts.index(self) || -1
+      Haze.entries.index(self) || -1
+    end
+
+    def url
+      File.join(Haze.opt(:uri), 'entry', slug)
     end
 
     class << self
       def open(path)
         path = Pathname.new(path)
-        new.tap {|p|
-          get_attributes(path).map {|a,v| p.__send__(a, v) }
+        new.tap {|e|
+          get_attributes(path).map {|a,v| e.__send__(a, v) }
         }
       end
 
@@ -70,8 +88,18 @@ module Haze
       set :haml, :attr_wrapper => '"'
     end
 
+    helpers do
+      def make_title
+        if @entry
+          [@entry.title, Haze.opt(:title)].join(Haze.opt(:titlesep) || " | ")
+        else
+          Haze.opt :title
+        end
+      end
+    end
+
     get '/' do
-      @entry = Haze.posts.last
+      @entry = Haze.entries.last
       raise Sinatra::NotFound unless @entry
 
       haml :entry
@@ -79,14 +107,14 @@ module Haze
     # Fix to allow mapping to an url with Rack
     get('') { redirect env['SCRIPT_NAME']+'/' }
 
-    get '/contents' do
-      @entries = Haze.posts.reverse
+    get '/archive' do
+      @entries = Haze.entries.reverse
 
       if params[:tag]
         @entries = @entries.select {|p| p.tags.include?(params[:tag]) }
       end
 
-      haml :contents
+      haml :archive
     end
 
     get '/pub/*' do
@@ -98,10 +126,14 @@ module Haze
     end
 
     get '/feed' do
+      content_type 'application/atom+xml'
+      @entries = Haze.entries.last(20)
+
+      builder :feed
     end
 
     get '/entry/:slug' do
-      @entry = Haze.posts.detect {|p| p.slug == params[:slug] }
+      @entry = Haze.entries.detect {|p| p.slug == params[:slug] }
       raise Sinatra::NotFound unless @entry
 
       haml :entry
