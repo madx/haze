@@ -1,0 +1,158 @@
+!aluminium_1 = #eeeeec
+!aluminium_2 = #d3d7cf
+!aluminium_3 = #babdb6
+!aluminium_4 = #888a85
+!aluminium_5 = #555753
+!aluminium_6 = #2e3436
+!butter_1 = #fce94f
+!butter_2 = #edd400
+!butter_3 = #c4a000
+!green_1 = #8ae234
+!green_2 = #73d216
+!green_3 = #4e9a06
+!brown_1 = #e9b96e
+!brown_2 = #c17d11
+!brown_3 = #8f5902
+!orange_1 = #fcaf3e
+!orange_2 = #f57900
+!orange_3 = #ce5c00
+!purple_1 = #ad7fa8
+!purple_2 = #75507b
+!purple_3 = #5c3566
+!red_1 = #ef2929
+!red_2 = #cc0000
+!red_3 = #a40000
+!blue_1 = #729fcf
+!blue_2 = #3465a4
+!blue_3 = #204a87
+
+=serif-italics
+  :font-family "Warnock Pro", "Goudy Old Style", "Palatino", Georgia, serif
+  :font-style italic
+
+=code
+  :background-color = !blue_3 - 100
+  :color = !aluminium_2
+  :font-family Monaco, "DejaVu Sans Mono", monospace
+
+body
+  :width 60%
+  :min-width 600px
+  :margin 1em auto
+  :font-family "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif
+
+a:link, a:visited
+  :text-decoration none
+  :color = !blue_3
+  :padding 0 1px
+a:hover, a:focus, a:active
+  :color = !blue_1
+
+h1
+  :padding 0.25em 0.5em
+  :margin 1em auto 0
+  :font-size 3em
+  +serif-italics
+  :text-align center
+  :color = !blue_2
+  :-moz-border-radius 12px 12px 0 0
+
+#content
+  :border-top = 1px solid !aluminium_2
+  :border-bottom = 1px solid !aluminium_2
+  :background-color = !aluminium_1
+  :position relative
+
+  #menu
+    :position absolute
+    :width 8em
+    :top 2em
+    :left -8em
+    :margin 0
+    :padding 0
+    li
+      :display block
+      :font-weight bold
+      :text-align right
+      :color white
+      :padding 0.5em 1em 0.5em 2em
+      :margin 0 0 4px
+      :background-color = !red_2
+      :border-right = 2px solid !red_3
+
+  .entry
+    :position relative
+    h2
+      :margin 0
+      :padding 0.5em 2em
+      +serif-italics
+      :font-size 2em
+    p.date
+      :position absolute
+      :top 1em
+      :right -2.5em
+      :font-weight bold
+      :text-align center
+      :color white
+      :padding 0.5em 1em
+      :margin 0
+      :background-color = !green_3
+      :border = 1px solid !green_1
+      :-moz-border-radius 16px
+      :-webkit-border-radius 16px
+      .day
+        :font-size 1.75em
+        :display block
+      .month
+        :font-size 1.5em
+        +serif-italics
+        :font-weight bold
+    .tags
+      :margin 0
+      :padding 0
+      :position absolute
+      :top 8em
+      :right -10em
+      :width 10em
+      :text-align left
+      li
+        :display block
+        :margin 0 0 8px
+      a:link, a:visited
+        :background-color = !blue_3
+        :color = !blue_1 + 90
+        :border-left = 2px solid !blue_3 - 20
+        :padding 2px 6px 2px 4px
+        :text-decoration none
+        :-moz-border-radius 0 5px 5px 0
+        :-webkit-border-radius 0 5px 5px 0
+      a:hover, a:focus, a:active
+        :background-color = !blue_2
+        :border-color = !blue_2 - 20
+    .body
+      :margin 0 4em 1em 2em
+      :padding 0.25em 1.25em
+      :background-color = !aluminium_1 + 15
+      :border-top = 1px solid !aluminium_2
+      :font-size 1.15em
+      :line-height 160%
+      :color = !aluminium_5
+      h3
+        :margin 1em 0 0
+      pre
+        +code
+        :font-size 0.9em
+        :padding 0.25em 0.5em
+        :border = 2px solid !blue_3
+        :width 90%
+        :margin 1em auto
+      code
+        +code
+        :padding 1px 4px
+        :font-size 0.9em
+
+#nav
+  :text-align center
+  :font-size 1.2em
+  :font-weight bold
+  :padding 0.5em 1em

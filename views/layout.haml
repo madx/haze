@@ -1,0 +1,14 @@
+!!! Strict
+%html{'xml:lang' => 'en', :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %title Haze
+    %meta{'http-equiv' => 'Content-Type', :content => 'text/html;charset=utf-8'}
+    %link{:rel => "stylesheet", :href => "/pub/style.css",
+          :media => "screen",   :type => "text/css"}
+  %body
+    %h1 Haze
+    #content
+      = yield
+    %p#footer
+      %a{:href => '/contents'} Browse contents
+      \| powered by <em>Haze</em>

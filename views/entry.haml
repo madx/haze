@@ -1,0 +1,20 @@
+.entry
+  %h2= @entry.title
+  %p.date
+    %span.day= @entry.date.strftime "%d"
+    %span.month= @entry.date.strftime "%b"
+  %ul.tags
+    - @entry.tags.each do |tag|
+      %li
+        %a{:href => "/contents?tag=#{tag}",
+           :title => "Entries tagged #{tag}"}= tag
+  .body= @entry.body
+
+#nav
+  - if _ = @entry.before
+    %span#go-before
+      %a{:href => "/entry/#{_.slug}", :title => "Previous entry"} «
+  %span#go-current= Haze.posts.index(@entry)
+  - if _ = @entry.after
+    %span#go-after
+      %a{:href => "/entry/#{_.slug}", :title => "Next entry"} »
