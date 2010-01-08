@@ -10,11 +10,12 @@
            :title => "Entries tagged #{tag}"}= tag
   .body= @entry.body
 
-#nav
-  - if _ = @entry.before
-    %span#go-before
-      %a{:href => "/entry/#{_.slug}", :title => "Previous entry"} «
-  %span#go-current= Haze.posts.index(@entry)
-  - if _ = @entry.after
-    %span#go-after
-      %a{:href => "/entry/#{_.slug}", :title => "Next entry"} »
+- unless @entry.index < 0
+  #nav
+    - if _ = @entry.before
+      %span#go-before
+        %a{:href => "/entry/#{_.slug}", :title => "Previous entry"} «
+    %span#go-current= Haze.posts.index(@entry)
+    - if _ = @entry.after
+      %span#go-after
+        %a{:href => "/entry/#{_.slug}", :title => "Next entry"} »

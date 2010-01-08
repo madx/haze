@@ -7,12 +7,19 @@ require 'mime/types'
 module Haze
   extend self
 
-  attr_reader :posts, :tags
+  attr_reader :posts, :drafts, :tags
 
-  @posts, @tags = [], {}
+  @posts, @drafts, @tags = [], {}
 
   def reload!
-    @posts = Dir['entries/*'].map {|p| Post.open(p) }.sort_by {|p| p.date }
+    @posts  = Dir['entries/*.hz'].map {|p|
+      Post.open(p)
+    }.sort_by {|p| p.date }
+
+    @drafts = Dir['entries/*.draft'].map {|p|
+      Post.open(p)
+    }.sort_by {|p| p.date }
+
     @posts.map {|p| p.tags }.flatten.tap do |ts|
       @tags = ts.flatten.uniq.inject({}) {|h,t| h.merge({t => ts.count(t)}) }
     end

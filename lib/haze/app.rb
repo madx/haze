@@ -40,5 +40,12 @@ module Haze
 
       haml :entry
     end
+
+    get '/draft/:slug' do
+      @entry = Haze.drafts.detect {|p| p.slug == params[:slug] }
+      raise Sinatra::NotFound unless @entry
+
+      haml :entry
+    end
   end
 end

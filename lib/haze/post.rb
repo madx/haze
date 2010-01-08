@@ -3,11 +3,15 @@ module Haze
     attr_accessor :date, :slug, :title, :body, :tags
 
     def after
-      Haze.posts[Haze.posts.index(self)+1]
+      Haze.posts[index+1]
     end
 
     def before
-      (idx = Haze.posts.index(self) - 1) < 0 ? nil : Haze.posts[idx]
+      index - 1 < 0 ? nil : Haze.posts[index-1]
+    end
+
+    def index
+      Haze.posts.index(self) || -1
     end
 
     class << self
@@ -22,7 +26,7 @@ module Haze
       def get_attributes(path)
         Hash.new.tap do |a|
           header, body = path.read.split(/^---+$/, 2)
-          date, a[:slug=] = path.basename.to_s.split('_', 2)
+          date, a[:slug=] = path.basename.to_s.chomp(path.extname).split('_', 2)
           base, increment = date.split('+')
           a[:date=]  = Time.parse(base) + (increment || 0).to_i
           a[:title=] = header.gsub(/\{#.+\}/, '').gsub(/#(\w+)/, '\1').strip
