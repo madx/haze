@@ -81,13 +81,14 @@ h1
       :background-color = !red_2
       :border-right = 2px solid !red_3
 
+  h2
+    :margin 0
+    :padding 0.5em 2em
+    +serif-italics
+    :font-size 2em
+
   .entry
     :position relative
-    h2
-      :margin 0
-      :padding 0.5em 2em
-      +serif-italics
-      :font-size 2em
     p.date
       :position absolute
       :top 1em
@@ -109,28 +110,6 @@ h1
         :font-size 1.5em
         +serif-italics
         :font-weight bold
-    .tags
-      :margin 0
-      :padding 0
-      :position absolute
-      :top 8em
-      :right -10em
-      :width 10em
-      :text-align left
-      li
-        :display block
-        :margin 0 0 8px
-      a:link, a:visited
-        :background-color = !blue_3
-        :color = !blue_1 + 90
-        :border-left = 2px solid !blue_3 - 20
-        :padding 2px 6px 2px 4px
-        :text-decoration none
-        :-moz-border-radius 0 5px 5px 0
-        :-webkit-border-radius 0 5px 5px 0
-      a:hover, a:focus, a:active
-        :background-color = !blue_2
-        :border-color = !blue_2 - 20
     .body
       :margin 0 4em 1em 2em
       :padding 0.25em 1.25em
@@ -152,9 +131,55 @@ h1
         +code
         :padding 1px 4px
         :font-size 0.9em
+    .tags
+      :margin 0
+      :padding 0
+      :position absolute
+      :top 8em
+      :right -10em
+      :width 10em
+      :text-align left
 
-#nav
-  :text-align center
-  :font-size 1.2em
-  :font-weight bold
-  :padding 0.5em 1em
+  .tags
+    li
+      :display block
+      :margin 0 0 8px
+    a:link, a:visited
+      :background-color = !blue_3
+      :color = !blue_1 + 90
+      :border-left = 2px solid !blue_3 - 20
+      :padding 2px 6px 2px 4px
+      :text-decoration none
+      :-moz-border-radius 0 5px 5px 0
+      :-webkit-border-radius 0 5px 5px 0
+    a:hover, a:focus, a:active
+      :background-color = !blue_2
+      :border-color = !blue_2 - 20
+
+  #nav
+    :text-align center
+    :font-size 1.5em
+    :font-weight bold
+    :padding 0.25em 1em
+
+  #entries
+    :margin 0 4em 1em 2em
+    :padding 0.25em 1.25em 0.25em 2em
+    :background-color = !aluminium_1 + 15
+    :border-top = 1px solid !aluminium_2
+    :font-size 1.25em
+    :line-height 160%
+    :color = !aluminium_5
+    .date
+      :font-size 0.9em
+    .tags
+      :margin 0
+      :padding 0
+      :display inline
+      :font-size 0.6em
+      li
+        :display inline
+        :margin 0
+
+#footer
+  :color = !aluminium_4

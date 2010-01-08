@@ -1,0 +1,14 @@
+- if params[:tag]
+  %h2 Entries tagged #{params[:tag]}
+- else
+  %h2 All entries
+%ul#entries
+  - @entries.each do |entry|
+    %li
+      %span.date= entry.date.strftime('%d %b')
+      %a{:href => "/entry/#{entry.slug}"}= entry.title
+      %ul.tags
+        - entry.tags.each do |tag|
+          %li
+            %a{:href => "/archive?tag=#{tag}",
+               :title => "Entries tagged #{tag}"}= tag

@@ -51,15 +51,15 @@ h1 {
   background-color: #cc0000;
   border-right: 2px solid #a40000;
 }
-#content .entry {
-  position: relative;
-}
-#content .entry h2 {
+#content h2 {
   margin: 0;
   padding: 0.5em 2em;
   font-family: "Warnock Pro", "Goudy Old Style", "Palatino", Georgia, serif;
   font-style: italic;
   font-size: 2em;
+}
+#content .entry {
+  position: relative;
 }
 #content .entry p.date {
   position: absolute;
@@ -85,32 +85,6 @@ h1 {
   font-family: "Warnock Pro", "Goudy Old Style", "Palatino", Georgia, serif;
   font-style: italic;
   font-weight: bold;
-}
-#content .entry .tags {
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  top: 8em;
-  right: -10em;
-  width: 10em;
-  text-align: left;
-}
-#content .entry .tags li {
-  display: block;
-  margin: 0 0 8px;
-}
-#content .entry .tags a:link, #content .entry .tags a:visited {
-  background-color: #204a87;
-  color: #ccf9ff;
-  border-left: 2px solid #0c3673;
-  padding: 2px 6px 2px 4px;
-  text-decoration: none;
-  -moz-border-radius: 0 5px 5px 0;
-  -webkit-border-radius: 0 5px 5px 0;
-}
-#content .entry .tags a:hover, #content .entry .tags a:focus, #content .entry .tags a:active {
-  background-color: #3465a4;
-  border-color: #205190;
 }
 #content .entry .body {
   margin: 0 4em 1em 2em;
@@ -141,10 +115,61 @@ h1 {
   padding: 1px 4px;
   font-size: 0.9em;
 }
-
-#nav {
+#content .entry .tags {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 8em;
+  right: -10em;
+  width: 10em;
+  text-align: left;
+}
+#content .tags li {
+  display: block;
+  margin: 0 0 8px;
+}
+#content .tags a:link, #content .tags a:visited {
+  background-color: #204a87;
+  color: #ccf9ff;
+  border-left: 2px solid #0c3673;
+  padding: 2px 6px 2px 4px;
+  text-decoration: none;
+  -moz-border-radius: 0 5px 5px 0;
+  -webkit-border-radius: 0 5px 5px 0;
+}
+#content .tags a:hover, #content .tags a:focus, #content .tags a:active {
+  background-color: #3465a4;
+  border-color: #205190;
+}
+#content #nav {
   text-align: center;
-  font-size: 1.2em;
+  font-size: 1.5em;
   font-weight: bold;
-  padding: 0.5em 1em;
+  padding: 0.25em 1em;
+}
+#content #entries {
+  margin: 0 4em 1em 2em;
+  padding: 0.25em 1.25em 0.25em 2em;
+  background-color: #fdfdfb;
+  border-top: 1px solid #d3d7cf;
+  font-size: 1.25em;
+  line-height: 160%;
+  color: #555753;
+}
+#content #entries .date {
+  font-size: 0.9em;
+}
+#content #entries .tags {
+  margin: 0;
+  padding: 0;
+  display: inline;
+  font-size: 0.6em;
+}
+#content #entries .tags li {
+  display: inline;
+  margin: 0;
+}
+
+#footer {
+  color: #888a85;
 }
