@@ -86,7 +86,7 @@ Example:
 
     <pre><code>puts "hello world"</code></pre>
 
-* Title: A ruby Hello world program
+* Title: A Ruby Hello world program
 * Tags: ruby, tutorial, programming
 * Date: 2009-01-08
 * Slug: ruby_hello_world
