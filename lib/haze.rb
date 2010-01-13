@@ -127,7 +127,7 @@ module Haze
 
     get '/feed' do
       content_type 'application/atom+xml'
-      @entries = Haze.entries.last(20)
+      @entries = Haze.entries.last(20).reverse
 
       builder :feed
     end
