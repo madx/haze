@@ -23,8 +23,10 @@ h1 {
   font-family: "Warnock Pro", "Goudy Old Style", "Palatino", Georgia, serif;
   font-style: italic;
   text-align: center;
-  color: #3465a4;
   -moz-border-radius: 12px 12px 0 0;
+}
+h1 a:link, h1 a:visited {
+  color: #3465a4;
 }
 
 #content {
