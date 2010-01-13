@@ -29,11 +29,12 @@ this:
 
     require File.join(File.dirname(__FILE__), 'lib', 'haze')
 
-    Haze.tap do |config|
-      config.set :title,  "Blog title"
-      config.set :author, "Your name"
-      config.set :uri,    "http://example.com/"
-    end
+    Haze.set :title,  "Blog title"
+    Haze.set :author, "Your name"
+    Haze.set :uri,    "http://example.com/"
+    Haze.set :email,  "me@example.com"
+    # Replace KEY by a sha1sum of something
+    Haze.set :key,    "KEY"
 
     Haze.reload!
 
@@ -78,7 +79,7 @@ Drafts are viewable using the url `/draft/<slug>`.
 
 Example:
 
-    $ cat entries/2009-01-08_ruby_hello_world.hz
+    $ cat entries/2009-01-08_helloworld.hz
     A #Ruby Hello world program {#tutorial,#programming}
     ---
     <p>Hello world is the most common program used to demonstrate a language's
@@ -89,5 +90,21 @@ Example:
 * Title: A Ruby Hello world program
 * Tags: ruby, tutorial, programming
 * Date: 2009-01-08
-* Slug: ruby_hello_world
+* Slug: helloworld
 
+To automatically update your post as you update the files, you may use
+mynyml's [watchr][1].
+
+## Issues #####################################################################
+
+There may be a bug with the Encoding class and HAML under Ruby 1.9, something
+about `Encoding.default_internal`. To fix it, add this somewhere in your
+`config.ru`:
+
+    class ::Encoding
+      def self.default_internal
+        "utf-8" # Or the right encoding
+      end
+    end
+
+[1]: http://github.com/mynyml/watchr
