@@ -24,6 +24,7 @@ module Haze
   set :author, "My name"
   set :uri,    "http://example.com/"
   set :email,  "me@example.com"
+  set :key,    "80aa59ada7f50f58c8cf4f43410f3c40c4e15149"
 
   def reload!
     @entries = Dir['entries/*.hz'].map {|p|
@@ -130,6 +131,15 @@ module Haze
       @entries = Haze.entries.last(20).reverse
 
       builder :feed
+    end
+
+    get '/_sync_' do
+      if params[:key] == Haze.opt(:key)
+        Haze.reload!
+        "done"
+      else
+        halt 403, "bad key."
+      end
     end
 
     get '/entry/:slug' do
