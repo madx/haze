@@ -92,8 +92,14 @@ Example:
 * Date: 2009-01-08
 * Slug: helloworld
 
+### Syncing content ###########################################################
+
+To synchronize the blog with contents, just hit the url `/_sync_?key=<KEY>`,
+replacing `<KEY>` with the value set in `config.ru`.
+
 To automatically update your post as you update the files, you may use
-mynyml's [watchr][1].
+mynyml's [watchr][1] or ttilley's [fssm][2] and integrate a script in the
+`config.ru` or using an external tool such as `inotifywait`.
 
 ## Issues #####################################################################
 
@@ -108,3 +114,4 @@ about `Encoding.default_internal`. To fix it, add this somewhere in your
     end
 
 [1]: http://github.com/mynyml/watchr
+[2]: http://github.com/ttiley/fssm
