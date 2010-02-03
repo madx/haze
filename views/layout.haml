@@ -8,6 +8,10 @@
     %link{:rel => "alternate", :type => "application/atom+xml", 
           :href => "/feed", :title => "#{Haze.opt :title} (Atom 0.3)"}
   %body
+    %ul#menu
+      - Haze.opt(:menu).each do |name,attrs|
+        %li
+          %a{:href => attrs.last, :title => attrs.first}= name
     %h1
       %a{:href => "/", :title => "Home"}= Haze.opt :title
     #content

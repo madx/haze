@@ -25,6 +25,10 @@ module Haze
   set :domain, "http://example.com/"
   set :email,  "me@example.com"
   set :key,    "80aa59ada7f50f58c8cf4f43410f3c40c4e15149"
+  set :menu,   {
+    "Home"     => ["Home", "/"],
+    "Archives" => ["View archives", "/archives"]
+  }
 
   def reload!
     @entries = Dir['entries/*.hz'].map {|p|
