@@ -22,7 +22,7 @@ module Haze
 
   set :title,  "My blog"
   set :author, "My name"
-  set :uri,    "http://example.com/"
+  set :domain, "http://example.com/"
   set :email,  "me@example.com"
   set :key,    "80aa59ada7f50f58c8cf4f43410f3c40c4e15149"
 
@@ -56,7 +56,7 @@ module Haze
     end
 
     def url
-      File.join(Haze.opt(:uri), 'entry', slug)
+      File.join(Haze.opt(:domain), 'entry', slug)
     end
 
     class << self

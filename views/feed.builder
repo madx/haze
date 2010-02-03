@@ -1,14 +1,14 @@
 xml.instruct! :xml, :version => "1.0"
 xml.feed :xmlns => "http://www.w3.org/2005/Atom" do
-  xml.id Haze.opt(:uri)
+  xml.id Haze.opt(:domain)
   xml.title Haze.opt(:title)
   xml.updated @entries.first.date.xmlschema
-  xml.link :href => Haze.opt(:uri)
-  xml.link :rel => "self", :href => File.join(Haze.opt(:uri), 'feed')
+  xml.link :href => Haze.opt(:domain)
+  xml.link :rel => "self", :href => File.join(Haze.opt(:domain), 'feed')
   xml.author do
     xml.name  Haze.opt(:author)
     xml.email Haze.opt(:email)
-    xml.uri   Haze.opt(:uri)
+    xml.uri   Haze.opt(:domain)
   end
 
   @entries.each do |entry|
@@ -19,7 +19,7 @@ xml.feed :xmlns => "http://www.w3.org/2005/Atom" do
       xml.author do
         xml.name  Haze.opt(:author)
         xml.email Haze.opt(:email)
-        xml.uri   Haze.opt(:uri)
+        xml.uri   Haze.opt(:domain)
       end
       xml.link :rel => "alternate", :href => entry.url
       xml.summary :type => "xhtml" do
@@ -29,7 +29,7 @@ xml.feed :xmlns => "http://www.w3.org/2005/Atom" do
       end
       entry.tags.each do |tag|
         xml.category :term => tag,
-                     :scheme => File.join(Haze.opt(:uri), "archive?tag=#{tag}")
+                     :scheme => File.join(Haze.opt(:domain), "archive?tag=#{tag}")
       end
     end
   end
