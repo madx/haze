@@ -38,7 +38,7 @@
 body
   :width 60%
   :min-width 600px
-  :margin 1em auto
+  :margin 0 auto 1em
   :font-family "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif
 
 a:link, a:visited
@@ -49,9 +49,22 @@ a:link, a:visited
 a:hover, a:focus, a:active
   :color = !blue_1
 
+#menu
+  :margin 0
+  :padding 0.5em 1em
+  :border
+    :bottom = 1px solid !aluminium_2
+    :left = 1px solid !aluminium_2
+    :right = 1px solid !aluminium_2
+  :background-color = !aluminium_1
+  li
+    :display inline
+    :list-style-type none
+    :margin-right 1em
+
 h1
   :padding 0.25em 0.5em
-  :margin 1em auto 0
+  :margin 0.5em auto 0.5em
   :font-size 3em
   +serif-italics
   :text-align center
@@ -64,23 +77,6 @@ h1
   :border-bottom = 1px solid !aluminium_2
   :background-color = !aluminium_1
   :position relative
-
-  #menu
-    :position absolute
-    :width 8em
-    :top 2em
-    :left -8em
-    :margin 0
-    :padding 0
-    li
-      :display block
-      :font-weight bold
-      :text-align right
-      :color white
-      :padding 0.5em 1em 0.5em 2em
-      :margin 0 0 4px
-      :background-color = !red_2
-      :border-right = 2px solid !red_3
 
   h2
     :margin 0
