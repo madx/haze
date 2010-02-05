@@ -116,3 +116,8 @@ about `Encoding.default_internal`. To fix it, add this somewhere in your
 
 [1]: http://github.com/mynyml/watchr
 [2]: http://github.com/ttiley/fssm
+
+## License ####################################################################
+
+Haze is published under the terms of the MIT license, you can find a copy of
+that license in the `LICENSE` file
