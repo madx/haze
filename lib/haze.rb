@@ -171,5 +171,9 @@ module Haze
 
       haml :static
     end
+
+    error Sinatra::NotFound do
+      haml :not_found
+    end
   end
 end
