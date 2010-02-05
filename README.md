@@ -93,7 +93,7 @@ Example:
 * Date: 2009-01-08
 * Slug: helloworld
 
-### Syncing content ###########################################################
+## Syncing content ############################################################
 
 To synchronize the blog with contents, just hit the url `/_sync_?key=<KEY>`,
 replacing `<KEY>` with the value set in `config.ru`.
@@ -101,6 +101,12 @@ replacing `<KEY>` with the value set in `config.ru`.
 To automatically update your post as you update the files, you may use
 mynyml's [watchr][1] or ttilley's [fssm][2] and integrate a script in the
 `config.ru` or using an external tool such as `inotifywait`.
+
+## Static pages ###############################################################
+
+Haze supports static pages. Just create a `static` folder in the root directory
+and put raw HTML pages in it. They will be rendered inside the layout and are
+accessables at `/static/<file name>`.
 
 ## Issues #####################################################################
 
