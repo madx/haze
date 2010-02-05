@@ -27,7 +27,7 @@ module Haze
   set :key,    "80aa59ada7f50f58c8cf4f43410f3c40c4e15149"
   set :menu,   {
     "Home"     => ["Home", "/"],
-    "Archives" => ["View archives", "/archives"]
+    "Archives" => ["View archives", "/archive"]
   }
 
   def reload!
