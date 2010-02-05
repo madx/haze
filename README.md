@@ -10,6 +10,7 @@ It has very few features compared to other blog engines. Exhaustively:
 * Tags
 * An archive page that lists every entry
 * An Atom feed
+* Drafts
 
 Why so few? Well, I simply don't need more.
 
@@ -31,7 +32,7 @@ this:
 
     Haze.set :title,  "Blog title"
     Haze.set :author, "Your name"
-    Haze.set :uri,    "http://example.com/"
+    Haze.set :domain, "http://example.com/"
     Haze.set :email,  "me@example.com"
     # Replace KEY by a sha1sum of something
     Haze.set :key,    "KEY"
