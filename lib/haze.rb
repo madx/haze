@@ -8,9 +8,9 @@ require 'builder'
 module Haze
   extend self
 
-  attr_reader :entries, :drafts, :tags, :options
+  attr_reader :entries, :drafts, :tags, :options, :static
 
-  @entries, @drafts, @tags, @options = [], [], {}, {}
+  @entries, @drafts, @static, @tags, @options = [], [], [], {}, {}
 
   def set(opt, value=true)
     options[opt] = value
@@ -38,6 +38,10 @@ module Haze
     @drafts = Dir['entries/*.draft'].map {|p|
       Entry.open(p)
     }.sort_by {|e| e.date }
+
+    @static = Dir['static/*'].select {|f| File.file?(f) }.inject({}) {|h,e|
+      h.merge({File.basename(e) => e})
+    }
 
     @entries.map {|e| e.tags }.flatten.tap do |ts|
       @tags = ts.flatten.uniq.inject({}) {|h,t| h.merge({t => ts.count(t)}) }
@@ -158,6 +162,14 @@ module Haze
       raise Sinatra::NotFound unless @entry
 
       haml :entry
+    end
+
+    get '/static/:page' do
+      raise Sinatra::NotFound unless Haze.static.key?(params[:page])
+
+      @contents = File.read(Haze.static[params[:page]])
+
+      haml :static
     end
   end
 end

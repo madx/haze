@@ -145,8 +145,17 @@ h1 a:link, h1 a:visited {
   font-weight: bold;
   padding: 0.25em 1em;
 }
+#content #page {
+  margin: 1em 2em 1em;
+  padding: 0.25em 1.25em;
+  background-color: #fdfdfb;
+  border-top: 1px solid #d3d7cf;
+  font-size: 1.15em;
+  line-height: 160%;
+  color: #555753;
+}
 #content #entries {
-  margin: 0 4em 1em 2em;
+  margin: 0 4em 1em;
   padding: 0.25em 1.25em 0.25em 2em;
   background-color: #fdfdfb;
   border-top: 1px solid #d3d7cf;
