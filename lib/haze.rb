@@ -39,10 +39,6 @@ module Haze
       Entry.open(p)
     }.sort_by {|e| e.date }
 
-    @static = Dir['static/*'].select {|f| File.file?(f) }.inject({}) {|h,e|
-      h.merge({File.basename(e) => e})
-    }
-
     @entries.map {|e| e.tags }.flatten.tap do |ts|
       @tags = ts.flatten.uniq.inject({}) {|h,t| h.merge({t => ts.count(t)}) }
     end
@@ -129,6 +125,7 @@ module Haze
     get '/pub/*' do
       path = File.join('public', params[:splat].first)
       halt 403 if path.include?('..')
+      raise Sinatra::NotFound unless File.exist?(path)
 
       content_type MIME::Types.of(path).first.to_s
       File.read path
@@ -165,9 +162,11 @@ module Haze
     end
 
     get '/static/:page' do
-      raise Sinatra::NotFound unless Haze.static.key?(params[:page])
+      path = File.join('static', params[:page])
+      halt 403 if path.include?('..')
+      raise Sinatra::NotFound unless File.exist?(path)
 
-      @contents = File.read(Haze.static[params[:page]])
+      @contents = File.read(path)
 
       haml :static
     end
