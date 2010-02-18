@@ -4,9 +4,21 @@ require 'sinatra/base'
 require 'mime/types'
 require 'haml'
 require 'builder'
+require 'sequel'
 
 module Haze
   extend self
+
+  DB = Sequel.connect 'sqlite://comments.db'
+
+  DB.create_table? :comments do
+    primary_key :id
+    String      :entry
+    String      :author
+    String      :email
+    Text        :body
+    Time        :date
+  end
 
   attr_reader :entries, :drafts, :tags, :options, :static
 
@@ -63,6 +75,10 @@ module Haze
       File.join(Haze.opt(:domain), 'entry', slug)
     end
 
+    def comments
+      Comment.filter(:entry => slug).order(:date)
+    end
+
     class << self
       def open(path)
         path = Pathname.new(path)
@@ -88,6 +104,16 @@ module Haze
     end
   end
 
+  class Comment < Sequel::Model
+    def self.create(params)
+      data = params.reject {|k,v|
+        !%w(author email website body).member?(k)
+      }.update(:entry => params[:slug], :date => Time.now)
+
+      super(data)
+    end
+  end
+
   class App < Sinatra::Base
     configure do
       set :haml, :attr_wrapper => '"'
@@ -100,6 +126,10 @@ module Haze
         else
           Haze.opt :title
         end
+      end
+
+      def partial(page, options={})
+        haml page, options.merge!(:layout => false)
       end
     end
 
@@ -152,6 +182,18 @@ module Haze
       raise Sinatra::NotFound unless @entry
 
       haml :entry
+    end
+
+    post '/entry/:slug' do
+      @entry = Haze.entries.detect {|p| p.slug == params[:slug] }
+      raise Sinatra::NotFound unless @entry
+      halt 403 unless params[:rcaptcha].empty?
+
+      [:author, :body].each {|f| halt 500 if params[f].empty? }
+
+      Comment.create(params)
+
+      redirect request.url + '#comments'
     end
 
     get '/draft/:slug' do

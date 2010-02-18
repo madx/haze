@@ -9,6 +9,25 @@
         %a{:href => "/archive?tag=#{tag}",
            :title => "Entries tagged #{tag}"}= tag
   .body= @entry.body
+  #comments
+    - @entry.comments.each do |comment|
+      .comment
+        %p.author= comment.author
+        %p.date= comment.date.xmlschema
+        .body= comment.body
+  %h3 Add a comment
+  #add_comment
+    %form{:action => "/entry/#{@entry.slug}", :method => "POST"}
+      %label{:for => "comment_author"} Name (required):
+      %input#comment_author{:type => "text", :name => "author"}
+      %label{:for => "comment_email"} E-mail:
+      %input#comment_email{:type => "text", :name => "email"}
+      %label{:for => "comment_website"} Website:
+      %input#comment_website{:type => "text", :name => "website"}
+      %label{:for => "comment_body"} Text (required):
+      %textarea#comment_body{:name => "body", :rows => 7}
+      %input#comment_rcaptcha{:type => "text", :name => "rcaptcha"}
+      %input{:type => "submit", :value => "Submit"}
 
 - unless @entry.index < 0
   #nav
