@@ -59,9 +59,9 @@ h1 a:link, h1 a:visited {
 #content .entry {
   position: relative;
 }
-#content .entry p.date {
+#content .entry > p.date {
   position: absolute;
-  top: 1em;
+  top: -1.75em;
   right: -2.5em;
   width: 3em;
   font-weight: bold;
@@ -74,17 +74,17 @@ h1 a:link, h1 a:visited {
   -moz-border-radius: 16px;
   -webkit-border-radius: 16px;
 }
-#content .entry p.date .day {
+#content .entry > p.date .day {
   font-size: 1.75em;
   display: block;
 }
-#content .entry p.date .month {
+#content .entry > p.date .month {
   font-size: 1.5em;
   font-family: "Warnock Pro", "Goudy Old Style", "Palatino", Georgia, serif;
   font-style: italic;
   font-weight: bold;
 }
-#content .entry .body {
+#content .entry > .body {
   margin: 0 4em 1em 2em;
   padding: 0.25em 1.25em;
   background-color: #fdfdfb;
@@ -93,10 +93,10 @@ h1 a:link, h1 a:visited {
   line-height: 160%;
   color: #555753;
 }
-#content .entry .body h3 {
+#content .entry > .body h3 {
   margin: 1em 0 0;
 }
-#content .entry .body pre {
+#content .entry > .body pre {
   background-color: #000023;
   color: #d3d7cf;
   font-family: Monaco, "DejaVu Sans Mono", monospace;
@@ -106,23 +106,23 @@ h1 a:link, h1 a:visited {
   width: 90%;
   margin: 1em auto;
 }
-#content .entry .body code {
+#content .entry > .body code {
   background-color: #000023;
   color: #d3d7cf;
   font-family: Monaco, "DejaVu Sans Mono", monospace;
   padding: 1px 4px;
   font-size: 0.9em;
 }
-#content .entry .tags {
+#content .entry > .tags {
   margin: 0;
   padding: 0;
   position: absolute;
-  top: 8em;
+  top: 5em;
   right: -10em;
   width: 10em;
   text-align: left;
 }
-#content .entry .tags li {
+#content .entry > .tags li {
   display: block;
   margin: 0 0 8px;
 }

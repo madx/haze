@@ -1,0 +1,9 @@
+- unless entry.index < 0
+  #nav
+    - if _ = entry.before
+      %span#go-before
+        %a{:href => "/entry/#{_.slug}", :title => "Previous entry"} «
+    %span#go-current= entry.index
+    - if _ = entry.after
+      %span#go-after
+        %a{:href => "/entry/#{_.slug}", :title => "Next entry"} »

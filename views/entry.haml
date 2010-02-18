@@ -1,3 +1,5 @@
+= partial :nav, :locals => {:entry => @entry}
+
 .entry
   %h2= @entry.title
   %p.date
@@ -29,12 +31,4 @@
       %input#comment_rcaptcha{:type => "text", :name => "rcaptcha"}
       %input{:type => "submit", :value => "Submit"}
 
-- unless @entry.index < 0
-  #nav
-    - if _ = @entry.before
-      %span#go-before
-        %a{:href => "/entry/#{_.slug}", :title => "Previous entry"} «
-    %span#go-current= @entry.index
-    - if _ = @entry.after
-      %span#go-after
-        %a{:href => "/entry/#{_.slug}", :title => "Next entry"} »
+= partial :nav, :locals => {:entry => @entry}

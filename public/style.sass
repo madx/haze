@@ -86,9 +86,9 @@ h1
 
   .entry
     :position relative
-    p.date
+    & > p.date
       :position absolute
-      :top 1em
+      :top -1.75em
       :right -2.5em
       :width 3em
       :font-weight bold
@@ -107,7 +107,7 @@ h1
         :font-size 1.5em
         +serif-italics
         :font-weight bold
-    .body
+    & > .body
       :margin 0 4em 1em 2em
       :padding 0.25em 1.25em
       :background-color = !aluminium_1 + 15
@@ -128,14 +128,14 @@ h1
         +code
         :padding 1px 4px
         :font-size 0.9em
-    .tags
+    & > .tags
       li
         :display block
         :margin 0 0 8px
       :margin 0
       :padding 0
       :position absolute
-      :top 8em
+      :top 5em
       :right -10em
       :width 10em
       :text-align left
