@@ -16,6 +16,7 @@ module Haze
     String      :entry
     String      :author
     String      :email
+    String      :website
     Text        :body
     Time        :date
   end
@@ -109,6 +110,10 @@ module Haze
       data = params.reject {|k,v|
         !%w(author email website body).member?(k)
       }.update(:entry => params[:slug], :date => Time.now)
+
+      %w(author email website body).each {|k|
+        data[k] = Rack::Utils.escape_html(data[k])
+      }
 
       super(data)
     end
