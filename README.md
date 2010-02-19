@@ -11,6 +11,7 @@ It has very few features compared to other blog engines. Exhaustively:
 * An archive page that lists every entry
 * An Atom feed
 * Drafts
+* A very simple comment system
 
 Why so few? Well, I simply don't need more.
 
