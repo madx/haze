@@ -162,7 +162,7 @@ module Haze
 
     get '/pub/*' do
       path = File.join('public', params[:splat].first)
-      halt 403 if path.include?('..')
+      halt 403, "forbidden" if path.include?('..')
       raise Sinatra::NotFound unless File.exist?(path)
 
       content_type MIME::Types.of(path).first.to_s
@@ -185,23 +185,16 @@ module Haze
       end
     end
 
+    get '/stylesheet.css' do
+      content_type 'text/css'
+      File.read 'stylesheet.css'
+    end
+
     get '/entry/:slug' do
       @entry = Haze.entries.detect {|p| p.slug == params[:slug] }
       raise Sinatra::NotFound unless @entry
 
       haml :entry
-    end
-
-    post '/entry/:slug' do
-      @entry = Haze.entries.detect {|p| p.slug == params[:slug] }
-      raise Sinatra::NotFound unless @entry
-      halt 403 unless params[:rcaptcha].empty?
-
-      [:author, :body].each {|f| halt 500 if params[f].empty? }
-
-      Comment.create(params)
-
-      redirect request.url + '#comments'
     end
 
     get '/draft/:slug' do
@@ -213,13 +206,28 @@ module Haze
 
     get '/static/:page' do
       path = File.join('static', params[:page])
-      halt 403 if path.include?('..')
+      halt 403, "forbidden" if path.include?('..')
       raise Sinatra::NotFound unless File.exist?(path)
 
       @contents = File.read(path)
 
       haml :static
     end
+
+    post '/entry/:slug' do
+      @entry = Haze.entries.detect {|p| p.slug == params[:slug] }
+      raise Sinatra::NotFound unless @entry
+      halt 403, "looks like spam" unless params[:rcaptcha].empty?
+
+      [:author, :body].each {|f|
+        halt 500, "invalid form data" if params[f].empty?
+      }
+
+      Comment.create(params)
+
+      redirect request.url + '#comments'
+    end
+
 
     error Sinatra::NotFound do
       haml :not_found
