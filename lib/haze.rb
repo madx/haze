@@ -205,7 +205,7 @@ module Haze
       @entry = Haze.drafts.detect {|p| p.slug == params[:slug] }
       raise Sinatra::NotFound unless @entry
 
-      haml :entry
+      haml :draft
     end
 
     get '/static/:page' do
