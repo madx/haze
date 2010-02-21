@@ -126,7 +126,7 @@ h1 a:link, h1 a:visited {
   display: block;
   margin: 0 0 8px;
 }
-#content .entry #comments .comment {
+#content #comments .comment {
   margin: 0 6em 1em 4em;
   background-color: #f8f8f6;
   border-top: 1px solid #babdb6;
@@ -135,48 +135,48 @@ h1 a:link, h1 a:visited {
   color: #555753;
   position: relative;
 }
-#content .entry #comments .comment .author {
+#content #comments .comment .author {
   margin: 0;
   padding: 0.10em 0.5em;
   background-color: #d3d7cf;
   color: #2e3436;
 }
-#content .entry #comments .comment .date {
+#content #comments .comment .date {
   position: absolute;
   top: -0.9em;
   right: 0.5em;
 }
-#content .entry #comments .comment .body {
+#content #comments .comment .body {
   padding: 0.25em 1.25em;
 }
-#content .entry h3 {
+#content #comments h3 {
   margin: 1em 6em 0.5em 2.5em;
   color: #555753;
 }
-#content .entry #add_comment {
+#content #comments #add_comment {
   margin: 0 6em 1em 4em;
 }
-#content .entry #add_comment label {
+#content #comments #add_comment label {
   font-weight: bold;
   color: #555753;
 }
-#content .entry #add_comment input[type=text], #content .entry #add_comment textarea {
+#content #comments #add_comment input[type=text], #content #comments #add_comment textarea {
   display: block;
   border: 1px solid #babdb6;
   background-color: #fdfdfb;
   color: #555753;
   padding: 2px 4px;
 }
-#content .entry #add_comment input[type=text], #content .entry #add_comment textarea, #content .entry #add_comment input[type=submit] {
+#content #comments #add_comment input[type=text], #content #comments #add_comment textarea, #content #comments #add_comment input[type=submit] {
   margin: 0.25em 0.5em 0.5em;
 }
-#content .entry #add_comment input[type=text] {
+#content #comments #add_comment input[type=text] {
   width: 50%;
 }
-#content .entry #add_comment textarea {
+#content #comments #add_comment textarea {
   width: 75%;
 }
-#content .entry #add_comment #comment_rcaptcha {
+#content #comments #add_comment #comment_rcaptcha {
   display: none;
 }
 #content .tags a:link, #content .tags a:visited {

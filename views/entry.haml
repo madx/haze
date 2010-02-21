@@ -1,22 +1,12 @@
-= partial :nav, :locals => {:entry => @entry}
+= partial :nav,   :locals => {:entry => @entry}
+= partial :entry, :locals => {:entry => @entry}
 
-.entry
-  %h2= @entry.title
-  %p.date
-    %span.day= @entry.date.strftime "%d"
-    %span.month= @entry.date.strftime "%b"
-  %ul.tags
-    - @entry.tags.each do |tag|
-      %li
-        %a{:href => "/archive?tag=#{tag}",
-           :title => "Entries tagged #{tag}"}= tag
-  .body= @entry.body
-  #comments
-    - @entry.comments.each do |comment|
-      .comment
-        %p.author= comment.author
-        %p.date= comment.date.xmlschema
-        .body= comment.body
+#comments
+  - @entry.comments.each do |comment|
+    .comment
+      %p.author= comment.author
+      %p.date= comment.date.xmlschema
+      .body= comment.body
   %h3 Add a comment
   #add_comment
     %form{:action => "/entry/#{@entry.slug}", :method => "POST"}

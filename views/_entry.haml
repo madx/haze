@@ -1,0 +1,12 @@
+.entry
+  %h2= entry.title
+  %p.date
+    %span.day= entry.date.strftime "%d"
+    %span.month= entry.date.strftime "%b"
+  %ul.tags
+    - entry.tags.each do |tag|
+      %li
+        %a{:href => "/archive?tag=#{tag}", :title => "Entries tagged #{tag}"}
+          = tag
+  .body= entry.body
+

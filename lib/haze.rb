@@ -137,7 +137,7 @@ module Haze
       end
 
       def partial(page, options={})
-        haml page, options.merge!(:layout => false)
+        haml "_#{page}".to_sym, options.merge!(:layout => false)
       end
     end
 
