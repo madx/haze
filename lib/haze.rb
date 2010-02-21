@@ -57,6 +57,7 @@ module Haze
     end
   end
 
+
   class Entry
     attr_accessor :date, :slug, :title, :body, :tags
 
@@ -105,6 +106,7 @@ module Haze
     end
   end
 
+
   class Comment < Sequel::Model
     def self.create(params)
       data = params.reject {|k,v|
@@ -118,6 +120,7 @@ module Haze
       super(data)
     end
   end
+
 
   class App < Sinatra::Base
     configure do
