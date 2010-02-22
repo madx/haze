@@ -44,17 +44,20 @@ module Haze
   }
 
   def reload!
-    @entries = Dir['entries/*.hz'].map {|p|
-      Entry.open(p)
-    }.sort_by {|e| e.date }
-
-    @drafts = Dir['entries/*.draft'].map {|p|
-      Entry.open(p)
-    }.sort_by {|e| e.date }
+    @entries = read_entries('entries/*.hz')
+    @drafts  = read_entries('entries/*.draft')
 
     @entries.map {|e| e.tags }.flatten.tap do |ts|
       @tags = ts.flatten.uniq.inject({}) {|h,t| h.merge({t => ts.count(t)}) }
     end
+  end
+
+  private
+
+  def read_entries(mask)
+    Dir[mask].map {|p|
+      Entry.open(p)
+    }.sort_by {|e| e.date }
   end
 
 
@@ -140,11 +143,23 @@ module Haze
       def partial(page, options={})
         haml "_#{page}".to_sym, options.merge!(:layout => false)
       end
+
+      def fetch_entry_in(collection)
+        collection.detect {|p| p.slug == params[:slug] }.tap do |e|
+          not_found unless e
+        end
+      end
+
+      def try_path(path)
+        halt 403, "forbidden" if path.include?('..')
+        not_found unless File.exist?(path)
+        return path
+      end
     end
 
     get '/' do
       @entry = Haze.entries.last
-      raise Sinatra::NotFound unless @entry
+      not_found unless @entry
 
       haml :entry
     end
@@ -162,9 +177,7 @@ module Haze
     end
 
     get '/pub/*' do
-      path = File.join('public', params[:splat].first)
-      halt 403, "forbidden" if path.include?('..')
-      raise Sinatra::NotFound unless File.exist?(path)
+      path = try_path(File.join('public', params[:splat].first))
 
       content_type MIME::Types.of(path).first.to_s
       File.read path
@@ -192,32 +205,26 @@ module Haze
     end
 
     get '/entry/:slug' do
-      @entry = Haze.entries.detect {|p| p.slug == params[:slug] }
-      raise Sinatra::NotFound unless @entry
+      @entry = fetch_entry_in Haze.entries
 
       haml :entry
     end
 
     get '/draft/:slug' do
-      @entry = Haze.drafts.detect {|p| p.slug == params[:slug] }
-      raise Sinatra::NotFound unless @entry
+      @entry = fetch_entry_in Haze.drafts
 
       haml :draft
     end
 
     get '/static/:page' do
-      path = File.join('static', params[:page])
-      halt 403, "forbidden" if path.include?('..')
-      raise Sinatra::NotFound unless File.exist?(path)
-
+      path = try_path(File.join('static', params[:page]))
       @contents = File.read(path)
 
       haml :static
     end
 
     post '/entry/:slug' do
-      @entry = Haze.entries.detect {|p| p.slug == params[:slug] }
-      raise Sinatra::NotFound unless @entry
+      @entry = fetch_entry_in Haze.entries
       halt 403, "looks like spam" unless params[:rcaptcha].empty?
 
       [:author, :body].each {|f|
@@ -229,8 +236,7 @@ module Haze
       redirect request.url + '#comments'
     end
 
-
-    error Sinatra::NotFound do
+    error 404 do
       haml :not_found
     end
   end
