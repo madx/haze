@@ -105,13 +105,23 @@ h1 a:link, h1 a:visited {
   border: 2px solid #204a87;
   width: 90%;
   margin: 1em auto;
+  line-height: 130%;
 }
-#content .entry > .body code {
+#content .entry > .body code, #content .entry > .body kbd {
   background-color: #000023;
   color: #d3d7cf;
   font-family: Monaco, "DejaVu Sans Mono", monospace;
   padding: 1px 4px;
   font-size: 0.9em;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+#content .entry > .body .vignette {
+  display: block;
+  margin: 1em auto;
+  border: 2px solid #babdb6;
+  padding: 2px;
+  background-color: #eeeeec;
 }
 #content .entry > .tags {
   margin: 0;
@@ -199,7 +209,7 @@ h1 a:link, h1 a:visited {
   padding: 0.25em 1em;
 }
 #content #page {
-  margin: 1em 2em 1em;
+  margin: 1em 2em;
   padding: 0.25em 1.25em;
   background-color: #fdfdfb;
   border-top: 1px solid #d3d7cf;
@@ -208,7 +218,7 @@ h1 a:link, h1 a:visited {
   color: #555753;
 }
 #content #entries {
-  margin: 0 4em 1em;
+  margin: 0 2em 1em;
   padding: 0.25em 1.25em 0.25em 2em;
   background-color: #fdfdfb;
   border-top: 1px solid #d3d7cf;
@@ -228,6 +238,22 @@ h1 a:link, h1 a:visited {
 #content #entries .tags li {
   display: inline;
   margin: 0;
+}
+
+#a-propos {
+  margin: 1em auto;
+}
+#a-propos img {
+  float: left;
+  border: 1px solid #2e3436;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+#a-propos p:first-child {
+  margin-top: 0;
+}
+#a-propos p:last-child {
+  margin-bottom: 0;
 }
 
 #footer {

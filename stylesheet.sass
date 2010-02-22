@@ -53,9 +53,9 @@ a:hover, a:focus, a:active
   :margin 0
   :padding 0.5em 1em
   :border
-    :bottom = 1px solid !aluminium_2
-    :left = 1px solid !aluminium_2
-    :right = 1px solid !aluminium_2
+    :bottom = 1px "solid" !aluminium_2
+    :left = 1px "solid" !aluminium_2
+    :right = 1px "solid" !aluminium_2
   :background-color = !aluminium_1
   li
     :display inline
@@ -73,8 +73,8 @@ h1
     :color = !blue_2
 
 #content
-  :border-top = 1px solid !aluminium_2
-  :border-bottom = 1px solid !aluminium_2
+  :border-top = 1px "solid" !aluminium_2
+  :border-bottom = 1px "solid" !aluminium_2
   :background-color = !aluminium_1
   :position relative
 
@@ -97,7 +97,7 @@ h1
       :padding 0.5em 1em
       :margin 0
       :background-color = !green_3
-      :border = 1px solid !green_1
+      :border = 1px "solid" !green_1
       :-moz-border-radius 16px
       :-webkit-border-radius 16px
       .day
@@ -111,7 +111,7 @@ h1
       :margin 0 4em 1em 2em
       :padding 0.25em 1.25em
       :background-color = !aluminium_1 + 15
-      :border-top = 1px solid !aluminium_2
+      :border-top = 1px "solid" !aluminium_2
       :font-size 1.15em
       :line-height 160%
       :color = !aluminium_5
@@ -121,13 +121,22 @@ h1
         +code
         :font-size 0.9em
         :padding 0.25em 0.5em
-        :border = 2px solid !blue_3
+        :border = 2px "solid" !blue_3
         :width 90%
         :margin 1em auto
-      code
+        :line-height 130%
+      code,kbd
         +code
         :padding 1px 4px
         :font-size 0.9em
+        :-moz-border-radius 5px
+        :-webkit-border-radius 5px
+      .vignette
+        :display block
+        :margin 1em auto
+        :border = 2px "solid" !aluminium_3
+        :padding 2px
+        :background-color = !aluminium_1
     & > .tags
       li
         :display block
@@ -143,7 +152,7 @@ h1
     .comment
       :margin 0 6em 1em 4em
       :background-color = !aluminium_1 + 10
-      :border-top = 1px solid !aluminium_3
+      :border-top = 1px "solid" !aluminium_3
       :font-size 1em
       :line-height 160%
       :color = !aluminium_5
@@ -169,7 +178,7 @@ h1
         :color = !aluminium_5
       input[type=text], textarea
         :display block
-        :border = 1px solid !aluminium_3
+        :border = 1px "solid" !aluminium_3
         :background-color = !aluminium_1 + 15
         :color = !aluminium_5
         :padding 2px 4px
@@ -186,7 +195,7 @@ h1
     a:link, a:visited
       :background-color = !blue_3
       :color = !blue_1 + 90
-      :border-left = 2px solid !blue_3 - 20
+      :border-left = 2px "solid" !blue_3 - 20
       :padding 2px 6px 2px 4px
       :text-decoration none
       :-moz-border-radius 0 5px 5px 0
@@ -202,19 +211,19 @@ h1
     :padding 0.25em 1em
 
   #page
-    :margin 1em 2em 1em
+    :margin 1em 2em
     :padding 0.25em 1.25em
     :background-color = !aluminium_1 + 15
-    :border-top = 1px solid !aluminium_2
+    :border-top = 1px "solid" !aluminium_2
     :font-size 1.15em
     :line-height 160%
     :color = !aluminium_5
 
   #entries
-    :margin 0 4em 1em
+    :margin 0 2em 1em
     :padding 0.25em 1.25em 0.25em 2em
     :background-color = !aluminium_1 + 15
-    :border-top = 1px solid !aluminium_2
+    :border-top = 1px "solid" !aluminium_2
     :font-size 1.25em
     :line-height 160%
     :color = !aluminium_5
@@ -228,6 +237,19 @@ h1
       li
         :display inline
         :margin 0
+
+#a-propos
+  :margin 1em auto
+  img
+    :float left
+    :border = 1px "solid" !aluminium_6
+    :margin
+      :right 1em
+      :bottom 1em
+  p:first-child
+    :margin-top 0
+  p:last-child
+    :margin-bottom 0
 
 #footer
   :color = !aluminium_4
