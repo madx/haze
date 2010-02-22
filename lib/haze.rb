@@ -130,7 +130,8 @@ module Haze
     helpers do
       def make_title
         if @entry
-          [@entry.title, Haze.opt(:title)].join(Haze.opt(:titlesep) || " | ")
+          sep = Haze.opt(:titlesep) || ' | '
+          [@entry.title.gsub(/<\/?[^>]+>/, ''), Haze.opt(:title)].join(sep)
         else
           Haze.opt :title
         end
