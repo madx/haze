@@ -42,6 +42,10 @@ module Haze
     "Home"     => ["Home", "/"],
     "Archives" => ["View archives", "/archive"]
   }
+  set :notifier, proc {|c|
+    puts "New comment on #{c.entry} by #{c.author}"
+  }
+  set :formatter, proc {|b| b }
 
   def reload!
     @entries = read_entries('entries/*.hz')
@@ -119,6 +123,8 @@ module Haze
       %w(author email website body).each {|k|
         data[k] = Rack::Utils.escape_html(data[k])
       }
+
+      data[:body] = Haze.opt(:formatter).call(data[:body])
 
       super(data)
     end
@@ -231,7 +237,7 @@ module Haze
         halt 500, "invalid form data" if params[f].empty?
       }
 
-      Comment.create(params)
+      Haze.opt(:notifier).call Comment.create(params)
 
       redirect request.url + '#comments'
     end
