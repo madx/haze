@@ -15,7 +15,7 @@ It has very few features compared to other blog engines. Exhaustively:
 
 Why so few? Well, I simply don't need more.
 
-Haze's source code is very short (~150LOC) thus the app is light and quick.
+Haze's source code is very short (~200LOC) thus the app is light and quick.
 
 ## Requirements ##############################################################
 
@@ -107,7 +107,7 @@ mynyml's [watchr][1] or ttilley's [fssm][2] and integrate a script in the
 
 Haze supports static pages. Just create a `static` folder in the root directory
 and put raw HTML pages in it. They will be rendered inside the layout and are
-accessables at `/static/<file name>`.
+available at `/static/<file name>`.
 
 ## Issues #####################################################################
 
