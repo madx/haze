@@ -161,6 +161,10 @@ module Haze
         not_found unless File.exist?(path)
         return path
       end
+
+      def stylesheet_url
+        "/stylesheet.css?#{File.mtime('stylesheet.css').to_i}"
+      end
     end
 
     get '/' do
@@ -207,6 +211,7 @@ module Haze
 
     get '/stylesheet.css' do
       content_type 'text/css'
+      response['Expires'] = (Time.now + 60*60*24*365).httpdate
       File.read 'stylesheet.css'
     end
 
